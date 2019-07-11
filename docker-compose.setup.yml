@@ -9,6 +9,11 @@ services:
     container_name: setup_elasticsearch
     command: ['/bin/bash', '-c', 'cat /usr/local/bin/setup-elasticsearch.sh | tr -d "\r" | bash']
     environment: ['ELASTIC_PASSWORD=${ELASTIC_PASSWORD}']
+    ulimits:
+      nofile: 65535
+      memlock:
+        soft: -1
+        hard: -1
     working_dir: '/config'
     volumes:
       - './config:/config'
